@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+    <div id="player2"></div>
+    <div id="player3"></div>
+    <div id="player4"></div>
+    </br>
+    <button id="play">再生</button>
+    <button id="pause">一時停止</button>
+    <button id="stop">終了</button>
+    <!--<button id="time">タイム取得</button>-->
+    </br>
+    再生ボタンで全プレーヤー同時再生</br>
+    右上のプレーヤーを再生・時間変更したタイミングに合わせて他のプレーヤーの時間を同期します
+
+    <script>
+      $(function(){
+        $("#play").on("click", function(){
+            player.playVideo();
+            player2.playVideo();
+            player3.playVideo();
+            player.unMute();
+            player2.mute();
+            player3.mute();
+        });
+        $("#pause").on("click", function(){
+            player.pauseVideo();
+            player2.pauseVideo();
+            player3.pauseVideo();
+        });
+
+        $("#stop").on("click", function(){
+            player.stopVideo();
+            player2.stopVideo();
+            player3.stopVideo();
+        });
+        $("#time").on("click", function(){
+            alert(
+              player.getCurrentTime()+'  '+
+              player2.getCurrentTime()+'  '+
+              player3.getCurrentTime()
+            )
+        });
+      });
+
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '360',
+          width: '640',
+          videoId: 'juCEVqOgszY',
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+        player2 = new YT.Player('player2', {
+          height: '360',
+          width: '640',
+          videoId: 'wVaEgCU78w8',
+          events: {
+          }
+        });
+        player3 = new YT.Player('player3', {
+          height: '360',
+          width: '640',
+          videoId: 'f976jGy2ZdA',
+          events: {
+          }
+        });
+      }
+
+      function onPlayerStateChange(event) {
+        if(event.data == YT.PlayerState.PLAYING){
+          player2.seekTo(event.target.getCurrentTime()-543);
+          
+          if(event.target.getCurrentTime() < 6470){
+            player3.seekTo(event.target.getCurrentTime()-972);
+          } else if (event.target.getCurrentTime()<8478){
+            player3.seekTo(event.target.getCurrentTime()-1128);
+          } else if (event.target.getCurrentTime() < 12271){
+            player3.seekTo(event.target.getCurrentTime()-1201);
+          } else {
+            player3.seekTo(event.target.getCurrentTime()-1374);
+          }
+        }
+      }
+      
+    </script>
+  </body>
+</html>
