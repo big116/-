@@ -25,20 +25,24 @@
             player.playVideo();
             player2.playVideo();
             player3.playVideo();
+            player4.playVideo();
             player.unMute();
             player2.mute();
             player3.mute();
+            player4.mute();
         });
         $("#pause").on("click", function(){
             player.pauseVideo();
             player2.pauseVideo();
             player3.pauseVideo();
+            player4.pauseVideo();
         });
 
         $("#stop").on("click", function(){
             player.stopVideo();
             player2.stopVideo();
             player3.stopVideo();
+            player4.stopVideo();
         });
         $("#time").on("click", function(){
             alert(
@@ -80,6 +84,14 @@
           events: {
           }
         });
+        player4 = new YT.Player('player4', {
+          height: '360',
+          width: '640',
+          videoId: 'fvixEkUuOYQ',
+          events: {
+          }
+        });
+
       }
 
       function onPlayerStateChange(event) {
@@ -95,6 +107,8 @@
           } else {
             player3.seekTo(event.target.getCurrentTime()-1374);
           }
+          
+          player4.seekTo(event.target.getCurrentTime()-947);
         }
       }
       
