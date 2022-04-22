@@ -10,11 +10,12 @@
     <div id="player2"></div>
     <div id="player3"></div>
     <div id="player4"></div>
+    <div id="player5"></div>
     </br>
     <button id="play">再生</button>
     <button id="pause">一時停止</button>
     <button id="stop">終了</button>
-    <!--<button id="time">タイム取得</button>-->
+    <button id="time">タイム取得</button>
     </br>
     再生ボタンで全プレーヤー同時再生</br>
     左上のプレーヤーを再生・時間変更したタイミングに合わせて他のプレーヤーの時間を同期します
@@ -27,16 +28,19 @@
             player2.playVideo();
             player3.playVideo();
             player4.playVideo();
+            player5.playVideo();
             player.unMute();
             player2.mute();
             player3.mute();
             player4.mute();
+            player5.mute();
         });
         $("#pause").on("click", function(){
             player.pauseVideo();
             player2.pauseVideo();
             player3.pauseVideo();
             player4.pauseVideo();
+            player5.pauseVideo();
         });
 
         $("#stop").on("click", function(){
@@ -44,13 +48,15 @@
             player2.stopVideo();
             player3.stopVideo();
             player4.stopVideo();
+            player5.stopVideo();
         });
         $("#time").on("click", function(){
             alert(
               player.getCurrentTime()+'  '+
               player2.getCurrentTime()+'  '+
               player3.getCurrentTime()+'  '+
-              player4.getCurrentTime()
+              player4.getCurrentTime()+'  '+
+              player5.getCurrentTime()
             )
         });
       });
@@ -93,6 +99,13 @@
           events: {
           }
         });
+        player5 = new YT.Player('player5', {
+          height: '360',
+          width: '640',
+          videoId: 'seSNZPeov58',
+          events: {
+          }
+        });
       }
 
       // 5. The API calls this function when the player's state changes.
@@ -101,6 +114,7 @@
       function onPlayerStateChange(event) {
         if(event.data == YT.PlayerState.PLAYING){
           player3.seekTo(event.target.getCurrentTime()-352);
+          player5.seekTo(event.target.getCurrentTime()-96);
           if(event.target.getCurrentTime() < 7480){
             player2.seekTo(event.target.getCurrentTime()-802);
             player4.seekTo(event.target.getCurrentTime()-347);
