@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+  <head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+    <div id="player2"></div>
+    <div id="player3"></div>
+    <div id="player4"></div>
+    </br>
+    <button id="play">再生</button>
+    <button id="pause">一時停止</button>
+    <button id="stop">終了</button>
+    <!--<button id="time">タイム取得</button>-->
+    </br>
+    再生ボタンで全プレーヤー同時再生</br>
+    左上のプレーヤーを再生・時間変更したタイミングに合わせて他のプレーヤーの時間を同期します
+
+
+    <script>
+      $(function(){
+        $("#play").on("click", function(){
+            player.playVideo();
+            player2.playVideo();
+            player3.playVideo();
+            player4.playVideo();
+            player.unMute();
+            player2.mute();
+            player3.mute();
+            player4.mute();
+        });
+        $("#pause").on("click", function(){
+            player.pauseVideo();
+            player2.pauseVideo();
+            player3.pauseVideo();
+            player4.pauseVideo();
+        });
+
+        $("#stop").on("click", function(){
+            player.stopVideo();
+            player2.stopVideo();
+            player3.stopVideo();
+            player4.stopVideo();
+        });
+        $("#time").on("click", function(){
+            alert(
+              player.getCurrentTime()+'  '+
+              player2.getCurrentTime()+'  '+
+              player3.getCurrentTime()+'  '+
+              player4.getCurrentTime()
+            )
+        });
+      });
+
+      // 2. This code loads the IFrame Player API code asynchronously.
+      var tag = document.createElement('script');
+
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player('player', {
+          height: '513',
+          width: '912',
+          videoId: 'dgknnhT_y5A',
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+        player2 = new YT.Player('player2', {
+          height: '513',
+          width: '912',
+          videoId: 'gznRJyfiwC0',
+          events: {
+          }
+        });
+        player3 = new YT.Player('player3', {
+          height: '513',
+          width: '912',
+          videoId: 'Fy5BS032R6c',
+          events: {
+          }
+        });
+        player4 = new YT.Player('player4', {
+          height: '513',
+          width: '912',
+          videoId: 'xFyekyahKFg',
+          events: {
+          }
+        });
+      }
+
+      // 5. The API calls this function when the player's state changes.
+      //    The function indicates that when playing a video (state=1),
+      //    the player should play for six seconds and then stop.
+      function onPlayerStateChange(event) {
+
+      }
+      
+    </script>
+  </body>
+</html>
