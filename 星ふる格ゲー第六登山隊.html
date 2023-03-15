@@ -4,14 +4,20 @@
   <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
+  <style>
+    .box{
+      display: inline-block;
+    }
+  </style>
   <body>
     <div id="player"></div>
     <div id="player2"></div>
     <div id="player3"></div>
-    <div id="twitch-embed"></div>
-    <div id="twitch-embed2"></div>
+    <div id="twitch-embed" class="box"></div>
+    <div id="twitch-embed2" class="box"></div>
     <div id="player4"></div>
 
+    </br>
     <button id="play">再生</button>
     <button id="pause">一時停止</button>
     </br>
@@ -49,6 +55,7 @@
         width: 640,
         height: 360,
         video: "1762949323",
+        autoplay: false,
         parent: ["big116"]
       };
       var twplayer = new Twitch.Player("twitch-embed", options);
@@ -57,9 +64,10 @@
         width: 640,
         height: 360,
         video: "1762949184",
+        autoplay: false,
         parent: ["big116"]
       };
-      var twplayer2 = new Twitch.Player("twitch-embed2", options);
+      var twplayer2 = new Twitch.Player("twitch-embed2", options2);
 
 
 
@@ -118,6 +126,5 @@
       }
       
     </script>
-
   </body>
 </html>
