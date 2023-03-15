@@ -32,6 +32,22 @@
       };
       new Twitch.Player("twitch-embed", options);
     </script>
-
+    <script>
+      $(function(){
+        $("#play").on("click", function(){
+            player.playVideo();
+            player2.playVideo();
+            player3.playVideo();
+            player4.playVideo();
+            player5.playVideo();
+            twitch-embed.play();
+            player.unMute();
+            player2.mute();
+            player3.mute();
+            player4.mute();
+            player5.mute();
+            twitch-embed.setMuted(True);
+        });
+    </script>
   </body>
 </html>
