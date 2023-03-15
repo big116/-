@@ -8,12 +8,12 @@
     <div id="player"></div>
     <div id="player2"></div>
     <div id="player3"></div>
-    <div id="player4"></div>
     <div id="twitch-embed"></div>
+    <div id="twitch-embed2"></div>
+    <div id="player4"></div>
 
     <button id="play">再生</button>
     <button id="pause">一時停止</button>
-    <button id="time">タイム取得</button>
     </br>
     再生ボタンで全プレーヤー同時再生</br>
     左上のプレーヤーを再生・時間変更したタイミングに合わせて他のプレーヤーの時間を同期します
@@ -27,11 +27,13 @@
             player3.playVideo();
             player4.playVideo();
             twplayer.play();
+            twplayer2.play();
             player.unMute();
             player2.mute();
             player3.mute();
             player4.mute();
             twplayer.setMuted(True);
+            twplayer2.setMuted(True);
         });
         $("#pause").on("click", function(){
             player.pauseVideo();
@@ -39,15 +41,7 @@
             player3.pauseVideo();
             player4.pauseVideo();
             twplayer.pause();
-        });
-
-        $("#time").on("click", function(){
-            alert(
-              player.getCurrentTime()+'  '+
-              player2.getCurrentTime()+'  '+
-              player3.getCurrentTime()+'  '+
-              player4.getCurrentTime()
-            )
+            twplayer2.pause();
         });
       });
 
@@ -55,10 +49,18 @@
         width: 640,
         height: 360,
         video: "1762949323",
-        // only needed if your site is also embedded on embed.example.com and othersite.example.com
         parent: ["big116"]
       };
       var twplayer = new Twitch.Player("twitch-embed", options);
+
+      var options2 = {
+        width: 640,
+        height: 360,
+        video: "1762949184",
+        parent: ["big116"]
+      };
+      var twplayer2 = new Twitch.Player("twitch-embed2", options);
+
 
 
       // 2. This code loads the IFrame Player API code asynchronously.
@@ -106,15 +108,12 @@
       //    the player should play for six seconds and then stop.
       function onPlayerStateChange(event) {
         if(event.data == YT.PlayerState.PLAYING){
-          player3.seekTo(event.target.getCurrentTime()-352);
-          player5.seekTo(event.target.getCurrentTime()-96);
-          if(event.target.getCurrentTime() < 7480){
-            player2.seekTo(event.target.getCurrentTime()-802);
-            player4.seekTo(event.target.getCurrentTime()-347);
-          }else{
-            player2.seekTo(event.target.getCurrentTime()-960);
-            player4.seekTo(event.target.getCurrentTime()-633);
-          }
+          player2.seekTo(event.target.getCurrentTime()-116)
+          player3.seekTo(event.target.getCurrentTime()-43);
+          player4.seekTo(event.target.getCurrentTime()-47);
+          twplayer.seek(event.target.getCurrentTime()-92)
+          twplayer2.seek(event.target.getCurrentTime()-66)
+
         }
       }
       
