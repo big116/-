@@ -30,7 +30,7 @@
         // only needed if your site is also embedded on embed.example.com and othersite.example.com
         parent: ["big116"]
       };
-      new Twitch.Player("twitch-embed", options);
+      var twplayer = new Twitch.Player("twitch-embed", options);
     </script>
     <script>
       $(function(){
@@ -40,13 +40,13 @@
             player3.playVideo();
             player4.playVideo();
             player5.playVideo();
-            twitch-embed.play();
+            twplayer.play();
             player.unMute();
             player2.mute();
             player3.mute();
             player4.mute();
             player5.mute();
-            twitch-embed.setMuted(True);
+            twplayer.setMuted(True);
         });
     </script>
   </body>
